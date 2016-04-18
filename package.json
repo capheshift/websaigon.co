@@ -9,7 +9,7 @@
     "dotenv": "^1.1.0",
     "express-handlebars": "^1.1.0",
     "handlebars": "^2.0.0",
-    "keystone": "0.3.15",
+    "keystone": "0.3.17",
     "moment": "^2.8.1",
     "restful-keystone": "^0.3.0",
     "underscore": "^1.8.0"

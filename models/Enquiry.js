@@ -39,25 +39,32 @@ Enquiry.schema.post('save', function() {
 
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 	if ('function' !== typeof callback) {
-		callback = function() {};
+		callback = function() {
+			console.log('Emails sent');
+		};
 	}
 	var enquiry = this;
 	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
+	keystone.list('User').model.find().where('isReceiveEmails', true).exec(function(err, admins) {
 		if (err) return callback(err);
-		new keystone.Email('enquiry-notification').send({
+		new keystone.Email({
+			'templateMandrillName': 'websaigon-new-order--notification'
+		}).send({
 			to: admins,
 			from: {
-				name: 'Dash',
-				email: 'contact@dash.com'
+				name: 'Websaigon Team',
+				email: 'hello@websaigon.co'
 			},
-			subject: 'New Enquiry for Dash',
-			enquiry: enquiry
+			subject: 'Thông báo đơn hàng mới',
+			enquiry: enquiry,
+			globalMergeVars :  {
+				HOST_URL: process.env.HOST_URL
+			}
 		}, callback);
 	});
 	
 };
 
 Enquiry.defaultSort = 'isResolved -createdAt';
-Enquiry.defaultColumns = 'name, email, phone, enquiryType, createdAt, isResolved';
+Enquiry.defaultColumns = 'name, email, phone, createdAt, isResolved';
 Enquiry.register();

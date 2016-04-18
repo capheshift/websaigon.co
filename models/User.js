@@ -13,6 +13,7 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true }
 }, 'Permissions', {
+	isReceiveEmails: { type: Boolean, label: 'Receive Emails', default: false },
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });
 
@@ -33,5 +34,5 @@ User.relationship({ ref: 'Post', path: 'posts', refPath: 'author' });
  * Registration
  */
 
-User.defaultColumns = 'name, email, isAdmin';
+User.defaultColumns = 'name, email, isAdmin, isReceiveEmails';
 User.register();
