@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "aita-prod",
+      "name": "websaigon.co",
       "script": "keystone.js",
       "watch": false,
       "ignore_watch": [
